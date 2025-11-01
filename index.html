@@ -11,7 +11,7 @@
       sizes="32x32"
       href="./assets/images/favicon-32x32.png"
     />
-
+    <link rel="stylesheet" href="./src/output.css" />
     <title>Frontend Mentor | Weather app</title>
 
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -25,30 +25,89 @@
       }
     </style>
   </head>
-  <body>
-    <header>
-      <nav></nav>
+  <body class="w-full h-full bg-blue-black pt-12 px-28 font-dm-sans">
+    <header class="">
+      <nav class="flex justify-between">
+        <img src="./assets/images/logo.svg" />
+        <div class="dropdown dropdown-hover dropdown-bottom dropdown-end">
+          <div
+            tabindex="0"
+            role="button"
+            class="btn m-1 bg-neutral800 px-4 rounded-lg"
+          >
+            <div class="flex gap-3 items-center">
+              <img src="./assets/images/icon-units.svg" />
+              <p>Units</p>
+              <img src="./assets/images/icon-dropdown.svg" />
+            </div>
+          </div>
+          <ul
+            tabindex="1"
+            class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+          >
+            <li>Celsius(C)</li>
+            <li>Fahrenheit</li>
+          </ul>
+        </div>
+      </nav>
     </header>
 
-    <main></main>
-    Units Switch to Imperial/Metric Temperature Celsius (°C) Fahrenheit (°F)
-    Wind Speed km/h mph Precipitation Millimeters (mm) Inches (in) How's the sky
-    looking today? Search for a city, e.g., New York Search Feels like
+    <main>
+      <form class="flex flex-col w-full justify-center items-center">
+        <section class="my-12">
+          <p
+            class="font-bricolage font-bold text-5xl text-center leading-[120%]"
+          >
+            How's the sky looking today?
+          </p>
+        </section>
+
+        <section class="w-1/2 space-x-2">
+          <label class="input rounded-lg bg-neutral800 border-none h-9">
+            <img src="./assets/images/icon-search.svg" class="w-4" />
+            <input
+              type="search"
+              required
+              placeholder="Search for a place"
+              class="placeholder-light-gray"
+            />
+          </label>
+          <button class="btn btn-medium rounded-lg bg-sea-blue font-normal">
+            Search
+          </button>
+        </section>
+
+        <section class="grid grid-cols-2 w-full">
+          <div>
+            <div>
+              <div class="bg-[url(../assets/images/bg-today-large.svg)]">
+                <p>Berlin, Germany</p>
+                <p>Tuesday, Aug 5, 2025</p>
+              </div>
+            </div>
+          </div>
+          <div></div>
+        </section>
+      </form>
+    </main>
+    <!-- Units Switch to Imperial/Metric Temperature Celsius (°C) Fahrenheit (°F)
+    Wind Speed km/h mph Precipitation Millimeters (mm) Inches (in) Search for a
+    city, e.g., New York Search Feels like -->
     <!-- Insert temperature here -->
 
-    Humidity
+    <!-- Humidity -->
     <!-- Insert humidity here -->
 
-    Wind
+    <!-- Wind -->
     <!-- Insert wind here -->
 
-    Precipitation
+    <!-- Precipitation -->
     <!-- Insert precipitation here -->
 
-    Daily forecast
+    <!-- Daily forecast -->
     <!-- Insert daily forecast for the next 7 days here -->
 
-    Hourly forecast
+    <!-- Hourly forecast -->
     <!-- Insert hourly forecast for the selected day here -->
 
     <div class="attribution">
