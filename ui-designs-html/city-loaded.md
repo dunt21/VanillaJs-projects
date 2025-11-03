@@ -1,137 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
+//city and date
 
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./assets/images/favicon-32x32.png"
-    />
-    <link rel="stylesheet" href="./src/output.css" />
-    <title>Frontend Mentor | Weather app</title>
-
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-    <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
-    </style>
-  </head>
-  <body class="w-full h-full bg-blue-black pt-12 px-28 font-dm-sans">
-    <header class="">
-      <nav class="flex justify-between">
-        <img src="./assets/images/logo.svg" alt="logo" />
-        <div class="dropdown dropdown-hover dropdown-bottom dropdown-end">
-          <div
-            tabindex="0"
-            role="button"
-            class="btn m-1 bg-neutral800 px-4 rounded-lg"
-          >
-            <div class="flex gap-3 items-center">
-              <img src="./assets/images/icon-units.svg" alt="settings-icon" />
-              <p>Units</p>
-              <img
-                src="./assets/images/icon-dropdown.svg"
-                alt="dropdown-icon"
-              />
-            </div>
-          </div>
-          <ul
-            tabindex="1"
-            class="dropdown-content menu bg-neutral800 rounded-box z-1 w-52 p-2 shadow-sm"
-          >
-            <li><a>Swith to imperial</a></li>
-            <div class="border-b-[0.1px] border-b-light-gray mb-1">
-              <li>
-                <a class="pointer-events-none text-light-gray text-xs"
-                  >Temperature</a
-                >
-              </li>
-              <li><a>Celsius(°C)</a></li>
-
-              <li><a>Fahrenheit(°F)</a></li>
-            </div>
-            <div class="border-b-[0.1px] border-b-light-gray mb-1">
-              <li>
-                <a class="pointer-events-none text-light-gray text-xs"
-                  >Wind Speed</a
-                >
-              </li>
-              <li><a>km/h</a></li>
-
-              <li><a>mph</a></li>
-            </div>
-            <div class="">
-              <li>
-                <a class="pointer-events-none text-light-gray text-xs"
-                  >Precipitation</a
-                >
-              </li>
-              <li><a>Millimeters(mm)</a></li>
-
-              <li><a>Inches(in)</a></li>
-            </div>
-          </ul>
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <form class="flex flex-col w-full justify-center items-center">
-        <section class="my-12">
-          <p
-            class="font-bricolage font-bold text-5xl text-center leading-[120%]"
-          >
-            How's the sky looking today?
-          </p>
-        </section>
-
-        <section class="w-[60%] space-x-6">
-          <div class="dropdown w-[83%]">
-            <label
-              class="input rounded-lg bg-neutral800 border-none h-9 w-full"
-            >
-              <img
-                src="./assets/images/icon-search.svg"
-                class="w-4"
-                alt="search-icon"
-              />
-              <input
-                type="search"
-                required
-                placeholder="Search for a place"
-                class="placeholder-light-gray"
-              />
-            </label>
-            <ul
-              tabindex="0"
-              class="dropdown-content menu z-1 bg-neutral800 rounded-box w-full p-2 shadow-sm mt-5"
-            >
-              <li><a>Accra</a></li>
-              <li><a>Kumasi</a></li>
-              <li><a>Takoradi</a></li>
-              <li><a>Cape Coast</a></li>
-              <li><a>Tamale</a></li>
-            </ul>
-          </div>
-
-          <button class="btn btn-medium rounded-lg bg-sea-blue font-normal">
-            Search
-          </button>
-        </section>
-
-        <section class="grid grid-cols-[70%_30%] w-full mt-8 gap-7">
-          <div class="">
-            <div class="grid grid-rows-[256px_112px] gap-8">
-              <div
+<div
                 class="bg-[url(../assets/images/bg-today-large.svg)] flex justify-between items-center py-20 px-5 border-0 rounded-3xl"
               >
                 <div class="space-y-2">
@@ -147,38 +16,21 @@
                   <p class="italic font-bold text-8xl">68°</p>
                 </div>
               </div>
-              <div class="grid grid-cols-4 h-10 gap-6">
-                <div
-                  class="bg-neutral800 p-5 border border-bluish-gray rounded-xl space-y-3"
-                >
-                  <p class="text-light-gray">Feels Like</p>
-                  <p class="text-3xl">64°</p>
-                </div>
-                <div
-                  class="bg-neutral800 p-5 border border-bluish-gray rounded-xl space-y-3"
-                >
-                  <p class="text-light-gray">Humidity</p>
-                  <p class="text-3xl">46%</p>
-                </div>
-                <div
-                  class="bg-neutral800 p-5 border border-bluish-gray rounded-xl space-y-3"
-                >
-                  <p class="text-light-gray">Wind</p>
-                  <p class="text-3xl">9 mph</p>
-                </div>
-                <div
-                  class="bg-neutral800 p-5 border border-bluish-gray rounded-xl space-y-3"
-                >
-                  <p class="text-light-gray">Precipitation</p>
-                  <p class="text-3xl">0 in</p>
-                </div>
-              </div>
-            </div>
 
-            <div class="mt-14 space-y-4">
-              <p class="font-bold text-lg">Daily forecast</p>
-              <div class="grid grid-cols-7 gap-4">
-                <div
+//values for
+//temp
+
+<p class="text-3xl">64°</p>
+//humidty
+<p class="text-3xl">46%</p>
+//wind
+<p class="text-3xl">9 mph</p>
+//precipitation
+<p class="text-3xl">0 in</p>
+
+//daily forecast
+
+<div
                   class="bg-neutral800 border border-bluish-gray rounded-xl space-y-3 flex flex-col items-center py-3 px-3"
                 >
                   <p>Tue</p>
@@ -244,16 +96,10 @@
                     <span>75°</span> <span>59°</span>
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="border-0 rounded-3xl bg-neutral800 flex flex-col items-center py-4 px-5 gap-3"
-          >
-            <div class="flex items-center gap-5">
-              <p class="font-bold text-lg">Hourly forecast</p>
-              <div class="dropdown dropdown-hover dropdown-bottom dropdown-end">
-                <div
+
+//hourly forecast
+
+ <div
                   tabindex="0"
                   role="button"
                   class="btn m-1 bg-bluish-gray px-4 rounded-lg shadow-none"
@@ -398,33 +244,3 @@
               <p>68°</p>
             </div>
           </div>
-        </section>
-      </form>
-    </main>
-    <!-- Units Switch to Imperial/Metric Temperature Celsius (°C) Fahrenheit (°F)
-    Wind Speed km/h mph Precipitation Millimeters (mm) Inches (in) Search for a
-    city, e.g., New York Search Feels like -->
-    <!-- Insert temperature here -->
-
-    <!-- Humidity -->
-    <!-- Insert humidity here -->
-
-    <!-- Wind -->
-    <!-- Insert wind here -->
-
-    <!-- Precipitation -->
-    <!-- Insert precipitation here -->
-
-    <!-- Daily forecast -->
-    <!-- Insert daily forecast for the next 7 days here -->
-
-    <!-- Hourly forecast -->
-    <!-- Insert hourly forecast for the selected day here -->
-
-    <div class="attribution">
-      Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
-      Coded by <a href="#">Your Name Here</a>.
-    </div>
-  </body>
-</html>
