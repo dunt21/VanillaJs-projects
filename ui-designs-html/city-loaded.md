@@ -1,7 +1,7 @@
 //city and date
 
 <div
-                class="bg-[url(../assets/images/bg-today-large.svg)] flex justify-between items-center py-20 px-5 border-0 rounded-3xl"
+                  class="bg-[url(../assets/images/bg-today-large.svg)] flex flex-col justify-center gap-7 md:gap-0 md:flex-row md:justify-between items-center md:py-20 px-5 border-0 rounded-3xl"
               >
                 <div class="space-y-2">
                   <p class="font-bold text-2xl">Berlin, Germany</p>
