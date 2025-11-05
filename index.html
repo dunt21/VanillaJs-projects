@@ -12,6 +12,7 @@
       href="./assets/images/favicon-32x32.png"
     />
     <link rel="stylesheet" href="./src/output.css" />
+    <script type="module" src="./js/controller.js"></script>
     <title>Frontend Mentor | Weather app</title>
 
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -101,7 +102,7 @@
         </section>
 
         <section class="w-full md:w-[60%] space-y-3 md:space-x-6">
-          <div class="dropdown w-full md:w-[83%]">
+          <div class="dropdown w-full md:w-[83%] search-container">
             <label
               class="input rounded-lg bg-neutral800 border-none h-9 w-full"
             >
@@ -114,7 +115,7 @@
                 type="search"
                 required
                 placeholder="Search for a place"
-                class="placeholder-light-gray"
+                class="placeholder-light-gray search-input"
               />
             </label>
             <ul
@@ -126,7 +127,7 @@
           </div>
 
           <button
-            class="btn w-full md:w-[10%] md:btn-medium rounded-lg bg-sea-blue font-normal hover:bg-dark-blue focus:outline-2! focus:outline-sea-blue!"
+            class="btn w-full md:w-[10%] md:btn-medium rounded-lg bg-sea-blue font-normal hover:bg-dark-blue focus:outline-2! focus:outline-sea-blue! search-btn"
           >
             Search
           </button>

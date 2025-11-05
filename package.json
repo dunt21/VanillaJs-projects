@@ -5,15 +5,17 @@
   "license": "ISC",
   "author": "suadddd",
   "type": "commonjs",
-  "main": "index.js",
   "scripts": {
-    "start": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch"
+    "start": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch",
+    "clean": "rimraf dist .parcel-cache",
+    "run": "parcel index.html"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.16",
     "tailwindcss": "^4.1.16"
   },
   "devDependencies": {
-    "daisyui": "^5.3.10"
+    "daisyui": "^5.3.10",
+    "parcel": "^2.16.0"
   }
 }
