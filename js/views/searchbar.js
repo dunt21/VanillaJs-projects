@@ -1,7 +1,23 @@
+import { displayWeatherContainer as displayWeathContHtml } from "../htmlReturns";
+
 class SearchBar {
   #parent = document.querySelector(".search-container");
   #form = this.#parent.closest("form");
   #query;
+  #cityId;
+
+  init() {
+    const dispWeatherCont = document.querySelector(
+      ".display-weather-container"
+    );
+    const ul = this.#parent.querySelector("ul");
+
+    const markup = displayWeathContHtml();
+
+    ul.classList.remove("hidden");
+    dispWeatherCont.innerHTML = "";
+    dispWeatherCont.insertAdjacentHTML("beforeend", markup);
+  }
 
   retrieveQuery(handler) {
     //prevent the input dropdown from hiding after focus is lost
@@ -24,6 +40,8 @@ class SearchBar {
   displaySearchOngoing() {
     const ul = this.#parent.querySelector("ul");
     ul.remove();
+
+    ul.classList.remove("hidden");
 
     const markup = `<ul
               tabindex="0"
@@ -50,13 +68,41 @@ class SearchBar {
               ${arr
                 .map(
                   (obj) => `
-                <p class="text-dark-gray">${obj.city}</p>
+                <li class="text-dark-gray">
+                <a id= ${obj.id}>${obj.city}</a>
+             </li>
                 `
                 )
                 .join(" ")}
             </ul>`;
 
     this.#parent.insertAdjacentHTML("beforeend", markup);
+
+    this.init();
+  }
+
+  searchError() {
+    const dispWeatherCont = document.querySelector(
+      ".display-weather-container"
+    );
+    const ul = this.#parent.querySelector("ul");
+
+    const markup = `<p class="font-bold text-xl  text-center">No search result found!</p>
+`;
+
+    dispWeatherCont.innerHTML = "";
+    ul.classList.add("hidden");
+    dispWeatherCont.insertAdjacentHTML("beforeend", markup);
+  }
+
+  getSelectedCityId(handler) {
+    const ul = this.#parent.querySelector("ul");
+
+    ul.addEventListener("click", (e) => {
+      const id = e.target.id;
+
+      handler(id);
+    });
   }
 }
 

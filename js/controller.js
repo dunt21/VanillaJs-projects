@@ -10,9 +10,17 @@ async function controlGeoCode(query) {
     await Models.getGeoResults(query);
 
     SearchBar.displayCityNames(Models.state.query.geoCodeRes);
+
+    SearchBar.getSelectedCityId(handleSelectedCityId);
   } catch (err) {
     console.error(err);
+
+    SearchBar.searchError();
   }
+}
+
+function handleSelectedCityId(id) {
+  Models.getSelectedCityObj(id);
 }
 
 function init() {
