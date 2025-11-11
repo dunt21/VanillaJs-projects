@@ -1,25 +1,10 @@
 import * as icons from "./icons";
 
-export function displayWeatherContainer() {
+export function displayWeatherContainer(markup) {
   return `
     <div class="">
             <div class="grid grid-rows-[256px_112px] gap-8">
-              <div
-                class="bg-[url(../assets/images/bg-today-large.svg)] flex flex-col justify-center gap-7 md:gap-0 md:flex-row md:justify-between items-center md:py-20 px-5 border-0 rounded-3xl"
-              >
-                <div class="space-y-2">
-                  <p class="font-bold text-2xl">City Name</p>
-                  <p class="text-light-gray">Day, Month Date, Year</p>
-                </div>
-                <div class="flex items-center gap-4">
-                  <img
-                    src=${icons.sunny}
-                    alt="sun"
-                    class="w-24"
-                  />
-                  <p class="italic font-bold text-8xl">0°</p>
-                </div>
-              </div>
+              ${markup}
               <div class="grid grid-cols-2 md:grid-cols-4 h-10 gap-6">
                 <div
                   class="bg-neutral800 p-5 border border-bluish-gray rounded-xl space-y-3"

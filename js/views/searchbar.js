@@ -6,18 +6,18 @@ class SearchBar {
   #query;
   #cityId;
 
-  init() {
-    const dispWeatherCont = document.querySelector(
-      ".display-weather-container"
-    );
-    const ul = this.#parent.querySelector("ul");
+  // init() {
+  //   const dispWeatherCont = document.querySelector(
+  //     ".display-weather-container"
+  //   );
+  //   const ul = this.#parent.querySelector("ul");
 
-    const markup = displayWeathContHtml();
+  //   const markup = displayWeathContHtml();
 
-    ul.classList.remove("hidden");
-    dispWeatherCont.innerHTML = "";
-    dispWeatherCont.insertAdjacentHTML("beforeend", markup);
-  }
+  //   ul.classList.remove("hidden");
+  //   dispWeatherCont.innerHTML = "";
+  //   dispWeatherCont.insertAdjacentHTML("beforeend", markup);
+  // }
 
   retrieveQuery(handler) {
     //prevent the input dropdown from hiding after focus is lost
@@ -77,8 +77,6 @@ class SearchBar {
             </ul>`;
 
     this.#parent.insertAdjacentHTML("beforeend", markup);
-
-    this.init();
   }
 
   searchError() {
