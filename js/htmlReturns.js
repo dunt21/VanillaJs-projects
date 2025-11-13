@@ -5,7 +5,7 @@ export function displayWeatherContainer(markup) {
     <div class="">
             <div class="grid grid-rows-[256px_112px] gap-8">
               ${markup}
-              <div class="grid grid-cols-2 md:grid-cols-4 h-10 gap-6">
+              <div class="grid grid-cols-2 md:grid-cols-4 h-10 gap-6 weather-conditions">
                 <div
                   class="bg-neutral800 p-5 border border-bluish-gray rounded-xl space-y-3"
                 >

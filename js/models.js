@@ -1,4 +1,5 @@
 import { GEOCODE_API, weatherAPI } from "./config";
+import { calcFeelsLike } from "./helper";
 import { units } from "./icons";
 import { weatherCodes } from "./weatherCode";
 
@@ -28,7 +29,7 @@ state.curDate = [curDate[0], curDate.slice(1, 3).join(" "), curDate[3]].join(
   ", "
 );
 
-//used to format the data gotten frm the api
+//used to format the data gotten frm the geo-code api
 export function geoResultFormat(geodata) {
   if (!geodata) return;
 
@@ -50,6 +51,7 @@ export function geoResultFormat(geodata) {
   state.geoCodeRes = geoResult;
 }
 
+//used to format the data gotten frm the weather Api
 export function weatherResultFormat(weatherData) {
   if (!weatherData) return;
 
@@ -65,7 +67,7 @@ export function weatherResultFormat(weatherData) {
     },
 
     hourly: {
-      precipation: weatherData.hourly.precipitation,
+      precipitation: weatherData.hourly.precipitation,
       humidity: weatherData.hourly.relative_humidity_2m,
       temperature: weatherData.hourly.temperature_2m,
       time: weatherData.hourly.time,
@@ -73,14 +75,12 @@ export function weatherResultFormat(weatherData) {
       units: {
         temp: weatherData.hourly_units.temperature_2m,
         humidity: weatherData.hourly_units.relative_humidity_2m,
-        precipation: weatherData.hourly_units.precipation,
+        precipitation: weatherData.hourly_units.precipitation,
         wind: weatherData.hourly_units.wind_speed_10m,
       },
       weatherCode: weatherData.hourly.weathercode,
     },
   };
-
-  console.log(weatherResult);
 
   state.weatherRes = weatherResult;
 }
@@ -113,12 +113,12 @@ export async function getSelectedCityObj(id) {
   await getWeatherResults(cityObj);
 }
 
+//to retrieve the weather data from the weather api by passing the lat,lng & timezone
 export async function getWeatherResults(object) {
   try {
     if (!object) return;
 
     const obj = object;
-    console.log(obj);
 
     const res = await fetch(
       weatherAPI(obj?.latitude, obj?.longitude, obj?.timezone)
@@ -133,30 +133,55 @@ export async function getWeatherResults(object) {
   }
 }
 
+const curDateTime = `T${new Date()
+  .toISOString()
+  .split(":")[0]
+  .replace()}:00`.slice(1);
+
+const timeIndex = state.weatherRes.hourly?.time.findIndex(
+  (time) => time === curDateTime
+);
+
+//to format the kind of data we'll display on our mainWeatheCard-Ui
 export function getMainWeatherCardData() {
-  const curDate = `T${new Date()
-    .toISOString()
-    .split(":")[0]
-    .replace()}:00`.slice(1);
-
-  const timeIndex = state.weatherRes.hourly?.time.findIndex(
-    (time) => time === curDate
-  );
-
   const temp = state.weatherRes.hourly?.temperature.at(timeIndex);
   const weatherCode = state.weatherRes.hourly?.weatherCode.at(timeIndex);
-  console.log(weatherCode);
 
   const weatherType = weatherCodes
     .find((obj) => obj?.code.includes(weatherCode))
     .value.trim();
 
   const data = {
-    temp,
+    temp: Math.round(temp),
     weatherType,
     date: state.curDate,
-    city: `${Models.state.query.selectedCity?.city}, ${Models.state.query.selectedCity?.country}`,
+    city: `${state.query.selectedCity?.city}, ${state.query.selectedCity?.country}`,
     units: state.weatherRes.hourly.units?.temp,
+  };
+  getWeatherConditions();
+
+  return data;
+}
+
+export function getWeatherConditions() {
+  const humidity = state.weatherRes.hourly.humidity.at(timeIndex);
+  const precipitation = state.weatherRes.hourly.precipitation.at(timeIndex);
+  const wind = state.weatherRes.hourly.wind.at(timeIndex);
+  const temp = state.weatherRes.hourly.temperature.at(timeIndex);
+
+  const feelsLike = calcFeelsLike(temp, humidity, wind);
+
+  const data = {
+    humidity,
+    precipitation,
+    wind: Math.round(wind),
+    feelsLike: Math.round(feelsLike),
+    units: {
+      humidity: state.weatherRes.hourly.units.humidity,
+      precipitation: state.weatherRes.hourly.units.precipitation,
+      wind: state.weatherRes.hourly.units.wind,
+      feelsLike: state.weatherRes.hourly.units.temp,
+    },
   };
 
   return data;

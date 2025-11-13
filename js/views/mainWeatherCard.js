@@ -16,11 +16,17 @@ class MainWeatherCard {
                 </div>
                 <div class="flex items-center gap-4">
                   <img
-                    src=${icons.data.weatherType}
+                    src=${
+                      data.weatherType === "partly-cloudy"
+                        ? icons.partlyCloudy
+                        : icons[data.weatherType]
+                    }
                     alt="sun"
                     class="w-24"
                   />
-                  <p class="italic font-bold text-8xl">${data.temp}</p>
+                  <p class="italic font-bold text-7xl">${data.temp}${
+      data.units
+    }</p>
                 </div>
                 </div>
                 `;
