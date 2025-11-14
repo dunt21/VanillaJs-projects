@@ -61,7 +61,7 @@ export function weatherResultFormat(weatherData) {
       tempMin: weatherData.daily.temperature_2m_min,
       time: weatherData.daily.time,
       units: {
-        temp: weatherData.daily_units.temperature_2m_max,
+        temp: weatherData.daily_units.temperature_2m_max.slice(0, 1),
       },
       weatherCode: weatherData.daily.weathercode,
     },
@@ -73,7 +73,7 @@ export function weatherResultFormat(weatherData) {
       time: weatherData.hourly.time,
       wind: weatherData.hourly.wind_speed_10m,
       units: {
-        temp: weatherData.hourly_units.temperature_2m,
+        temp: weatherData.hourly_units.temperature_2m.slice(0, 1),
         humidity: weatherData.hourly_units.relative_humidity_2m,
         precipitation: weatherData.hourly_units.precipitation,
         wind: weatherData.hourly_units.wind_speed_10m,
@@ -81,6 +81,8 @@ export function weatherResultFormat(weatherData) {
       weatherCode: weatherData.hourly.weathercode,
     },
   };
+
+  console.log(weatherResult);
 
   state.weatherRes = weatherResult;
 }
@@ -163,6 +165,7 @@ export function getMainWeatherCardData() {
   return data;
 }
 
+//used to group the data of the current hour weather condition
 export function getWeatherConditions() {
   const humidity = state.weatherRes.hourly.humidity.at(timeIndex);
   const precipitation = state.weatherRes.hourly.precipitation.at(timeIndex);
@@ -184,5 +187,42 @@ export function getWeatherConditions() {
     },
   };
 
+  getDailyForecast();
+
   return data;
+}
+
+export function getDailyForecast() {
+  const date = state.weatherRes.daily.time.map((date) => {
+    const day = new Date(date);
+    const weekday = day.toLocaleString("en-US", {
+      weekday: "short",
+    });
+
+    return weekday;
+  });
+
+  const tempMin = state.weatherRes.daily.tempMin;
+  const tempMax = state.weatherRes.daily.tempMax;
+
+  const weatherType = state.weatherRes.daily.weatherCode.map((code) => {
+    return weatherCodes.find((obj) => obj.code.includes(code)).value;
+  });
+
+  const data = {
+    date,
+    tempMin,
+    tempMax,
+    weatherType,
+  };
+
+  const groupedDate = data.date.map((day, i) => ({
+    day,
+    tempMin: data.tempMin[i],
+    tempMax: data.tempMax[i],
+    weatherType: data.weatherType[i],
+    unit: state.weatherRes.daily.units.temp,
+  }));
+
+  return groupedDate;
 }

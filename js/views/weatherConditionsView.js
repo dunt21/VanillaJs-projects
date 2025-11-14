@@ -22,13 +22,13 @@ class WeatherConditionsView {
                   class="bg-neutral800 p-5 border border-bluish-gray rounded-xl space-y-3"
                 >
                   <p class="text-light-gray">Wind</p>
-                  <p class="text-3xl">${data.wind}${data.units.wind}</p>
+                  <p class="text-3xl">${data.wind} ${data.units.wind}</p>
                 </div>
                 <div
                   class="bg-neutral800 p-5 border border-bluish-gray rounded-xl space-y-3"
                 >
                   <p class="text-light-gray">Precipitation</p>
-                  <p class="text-3xl">${data.precipitation}${data.units.precipitation}</p>
+                  <p class="text-3xl">${data.precipitation} ${data.units.precipitation}</p>
                 </div>
 
 `;

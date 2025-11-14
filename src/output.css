@@ -204,6 +204,55 @@
   }
 }
 @layer utilities {
+  .drawer-side {
+    :where(&) {
+      @layer daisyui.component {
+        overflow-x: hidden;
+        overflow-y: hidden;
+      }
+    }
+    @layer daisyui.component {
+      pointer-events: none;
+      visibility: hidden;
+      position: fixed;
+      inset-inline-start: calc(0.25rem * 0);
+      top: calc(0.25rem * 0);
+      z-index: 10;
+      grid-column-start: 1;
+      grid-row-start: 1;
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      grid-template-rows: repeat(1, minmax(0, 1fr));
+      align-items: flex-start;
+      justify-items: start;
+      overscroll-behavior: contain;
+      background-color: transparent;
+      opacity: 0%;
+      transition: opacity 0.2s ease-out 0.1s allow-discrete, visibility 0.3s ease-out 0.1s allow-discrete;
+      height: 100vh;
+      height: 100dvh;
+      > .drawer-overlay {
+        position: sticky;
+        top: calc(0.25rem * 0);
+        cursor: pointer;
+        place-self: stretch;
+        background-color: oklch(0% 0 0 / 40%);
+      }
+      > * {
+        grid-column-start: 1;
+        grid-row-start: 1;
+      }
+      > *:not(.drawer-overlay) {
+        will-change: transform;
+        transition: translate 0.3s ease-out, width 0.2s ease-out;
+        translate: -100%;
+        [dir="rtl"] & {
+          translate: 100%;
+        }
+      }
+    }
+  }
   .drawer-open {
     @layer daisyui.modifier {
       :where(& > .drawer-side) {
@@ -234,6 +283,34 @@
           pointer-events: auto;
           visibility: visible;
         }
+      }
+    }
+  }
+  .drawer-toggle {
+    @layer daisyui.component {
+      position: fixed;
+      height: calc(0.25rem * 0);
+      width: calc(0.25rem * 0);
+      appearance: none;
+      opacity: 0%;
+      &:checked {
+        & ~ .drawer-side {
+          pointer-events: auto;
+          visibility: visible;
+          overflow-y: auto;
+          opacity: 100%;
+          scrollbar-color: currentColor oklch(0 0 0 / calc(var(--page-has-backdrop, 0) * 0.4));
+          @supports (color: color-mix(in lab, red, red)) {
+            scrollbar-color: color-mix(in oklch, currentColor 35%, #0000) oklch(0 0 0 / calc(var(--page-has-backdrop, 0) * 0.4));
+          }
+          & > *:not(.drawer-overlay) {
+            translate: 0%;
+          }
+        }
+      }
+      &:focus-visible ~ .drawer-content label.drawer-button {
+        outline: 2px solid;
+        outline-offset: 2px;
       }
     }
   }
@@ -1772,6 +1849,13 @@
   .z-1 {
     z-index: 1;
   }
+  .drawer-content {
+    @layer daisyui.component {
+      grid-column-start: 2;
+      grid-row-start: 1;
+      min-width: calc(0.25rem * 0);
+    }
+  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -2037,6 +2121,9 @@
   .w-full {
     width: 100%;
   }
+  .max-w-full {
+    max-width: 100%;
+  }
   .min-w-screen {
     min-width: 100vw;
   }
@@ -2152,6 +2239,9 @@
       margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
     }
+  }
+  .overflow-x-hidden {
+    overflow-x: hidden;
   }
   .rounded-3xl {
     border-radius: var(--radius-3xl);
@@ -2359,6 +2449,10 @@
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
   }
+  .ease-out {
+    --tw-ease: var(--ease-out);
+    transition-timing-function: var(--ease-out);
+  }
   .\[--gap\:10px\] {
     --gap: 10px;
   }
@@ -2378,6 +2472,41 @@
   .focus\:outline-sea-blue\! {
     &:focus {
       outline-color: var(--color-sea-blue) !important;
+    }
+  }
+  .sm\:flex-row {
+    @media (width >= 40rem) {
+      flex-direction: row;
+    }
+  }
+  .sm\:justify-between {
+    @media (width >= 40rem) {
+      justify-content: space-between;
+    }
+  }
+  .sm\:px-8 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 8);
+    }
+  }
+  .sm\:px-10 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 10);
+    }
+  }
+  .sm\:px-12 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 12);
+    }
+  }
+  .sm\:px-14 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 14);
+    }
+  }
+  .sm\:px-16 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 16);
     }
   }
   .md\:mt-14 {
@@ -2437,6 +2566,16 @@
   .md\:px-10 {
     @media (width >= 48rem) {
       padding-inline: calc(var(--spacing) * 10);
+    }
+  }
+  .md\:px-12 {
+    @media (width >= 48rem) {
+      padding-inline: calc(var(--spacing) * 12);
+    }
+  }
+  .md\:px-16 {
+    @media (width >= 48rem) {
+      padding-inline: calc(var(--spacing) * 16);
     }
   }
   .md\:py-20 {
