@@ -35,7 +35,7 @@ export function displayWeatherContainer(markup) {
 
             <div class="mt-44 md:mt-14 space-y-4">
               <p class="font-bold text-lg">Daily forecast</p>
-              <div class="grid grid-cols-3 md:grid-cols-7 gap-4 daily-forecast-container">
+              <div class="grid grid-cols-3 lg:grid-cols-7 gap-4 daily-forecast-container">
                 <div
                   class="bg-neutral800 border border-bluish-gray rounded-xl space-y-3 flex flex-col items-center py-3 px-3"
                 ></div>
@@ -93,7 +93,9 @@ export function displayWeatherContainer(markup) {
                 </ul>
               </div>
             </div>
-            <div
+
+            <div class="w-full space-y-3 hourly-forecast-container">
+              <div
               class="bg-bluish-gray border border-bluish-gray rounded-lg flex justify-between items-center w-full py-2 px-3 h-[57px]"
             ></div>
             <div
@@ -120,6 +122,8 @@ export function displayWeatherContainer(markup) {
             <div
               class="bg-bluish-gray border border-bluish-gray rounded-lg flex justify-between items-center w-full py-2 px-3 h-[57px]"
             ></div>
+            </div>
+          
           </div>
     `;
 }

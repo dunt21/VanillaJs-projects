@@ -140,12 +140,18 @@ const curDateTime = `T${new Date()
   .split(":")[0]
   .replace()}:00`.slice(1);
 
-const timeIndex = state.weatherRes.hourly?.time.findIndex(
-  (time) => time === curDateTime
-);
+function getTimeIndex() {
+  const timeIndex = state.weatherRes.hourly?.time.findIndex(
+    (time) => time === curDateTime
+  );
+
+  return timeIndex;
+}
 
 //to format the kind of data we'll display on our mainWeatheCard-Ui
 export function getMainWeatherCardData() {
+  const timeIndex = getTimeIndex();
+
   const temp = state.weatherRes.hourly?.temperature.at(timeIndex);
   const weatherCode = state.weatherRes.hourly?.weatherCode.at(timeIndex);
 
@@ -167,6 +173,8 @@ export function getMainWeatherCardData() {
 
 //used to group the data of the current hour weather condition
 export function getWeatherConditions() {
+  const timeIndex = getTimeIndex();
+
   const humidity = state.weatherRes.hourly.humidity.at(timeIndex);
   const precipitation = state.weatherRes.hourly.precipitation.at(timeIndex);
   const wind = state.weatherRes.hourly.wind.at(timeIndex);
@@ -192,6 +200,7 @@ export function getWeatherConditions() {
   return data;
 }
 
+//used to retrieve the daily forecast data and group them nicely
 export function getDailyForecast() {
   const date = state.weatherRes.daily.time.map((date) => {
     const day = new Date(date);
@@ -224,5 +233,46 @@ export function getDailyForecast() {
     unit: state.weatherRes.daily.units.temp,
   }));
 
+  getHourlyForecast();
+
   return groupedDate;
+}
+
+export function getHourlyForecast() {
+  let above12 = [];
+  let below12 = [];
+
+  const timeIndex = getTimeIndex();
+
+  state.weatherRes.hourly.time
+    .slice(timeIndex, timeIndex + 8)
+    .map((time) => time.split("T")[1].split(":")[0])
+    .map((el) => +el)
+    .map((el) => {
+      if (el >= 12 || el < 0o0) {
+        above12.push(el > 12 ? `${el - 12} PM` : `${el} PM`);
+      } else {
+        below12.push(`${el} AM`);
+      }
+    });
+
+  const hourlyTime = above12.concat(below12);
+  const weatherType = state.weatherRes.hourly.weatherCode
+    .slice(timeIndex, timeIndex + 8)
+    .map((code) => weatherCodes.find((el) => el.code.includes(code)).value);
+
+  const temp = state.weatherRes.hourly.temperature.slice(
+    timeIndex,
+    timeIndex + 8
+  );
+  const unit = state.weatherRes.hourly.units.temp;
+
+  const hourlyObj = hourlyTime.map((el, i) => ({
+    time: el,
+    temp: Math.round(temp[i]),
+    unit,
+    weatherType: weatherType[i],
+  }));
+
+  return hourlyObj;
 }

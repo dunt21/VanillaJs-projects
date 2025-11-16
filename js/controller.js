@@ -4,6 +4,7 @@ import mainWeatherCard from "./views/mainWeatherCard";
 import loadingState from "./views/loadingState";
 import weatherConditionsView from "./views/weatherConditionsView";
 import dailyForecastView from "./views/dailyForecastView";
+import hourlyForecastView from "./views/hourlyForecastView";
 
 //func to get the geo units of user's city
 async function controlGeoCode(query) {
@@ -43,6 +44,8 @@ async function handleSelectedCityId(id) {
   controlWeatherConditions();
 
   controlDailyForecast();
+
+  controlHourlyForecast();
 }
 
 //to get the data for the mainWeatherCard and pass it into the view for display
@@ -56,16 +59,24 @@ export function controlMainWeatherCard() {
   }
 }
 
+//used to get the data of the weather conditions then pass to its view for display
 export function controlWeatherConditions() {
   const data = Models.getWeatherConditions();
 
   weatherConditionsView.updateCards(data);
 }
 
+//used to get the data of the daily forecast then pass to its view for display
 export function controlDailyForecast() {
   const data = Models.getDailyForecast();
 
   dailyForecastView.updateCards(data);
+}
+
+export function controlHourlyForecast() {
+  const data = Models.getHourlyForecast();
+
+  hourlyForecastView.updateCards(data);
 }
 
 function init() {
