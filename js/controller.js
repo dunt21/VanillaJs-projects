@@ -5,6 +5,7 @@ import loadingState from "./views/loadingState";
 import weatherConditionsView from "./views/weatherConditionsView";
 import dailyForecastView from "./views/dailyForecastView";
 import hourlyForecastView from "./views/hourlyForecastView";
+import dropdownDailyView from "./views/dropdownDailyView";
 
 //func to get the geo units of user's city
 async function controlGeoCode(query) {
@@ -74,10 +75,14 @@ export function controlDailyForecast() {
 }
 
 export function controlHourlyForecast() {
+  dropdownDailyView.updateDropdown(Models.getDailyHour());
+
   const data = Models.getHourlyForecast();
 
   hourlyForecastView.updateCards(data);
 }
+
+dropdownDailyView.getSelectedDay();
 
 function init() {
   SearchBar.retrieveQuery(controlGeoCode);

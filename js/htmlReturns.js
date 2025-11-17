@@ -81,8 +81,8 @@ export function displayWeatherContainer(markup) {
                 </div>
                 <ul
                   tabindex="-1"
-                  class="dropdown-content menu bg-neutral800 rounded-box z-1 w-52 p-2 shadow-sm border border-bluish-gray [&_a]:font-bold"
-                >
+                  class="dropdown-content menu bg-neutral800 rounded-box z-1 w-52 p-2 shadow-sm border border-bluish-gray [&_a]:font-bold  weekdays-container "
+              >
                   <li><a>Monday</a></li>
                   <li><a>Tuesday</a></li>
                   <li><a>Wednesday</a></li>

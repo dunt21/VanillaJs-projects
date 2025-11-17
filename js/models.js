@@ -238,6 +238,29 @@ export function getDailyForecast() {
   return groupedDate;
 }
 
+export function getDailyHour() {
+  const curHour = new Date().getHours() + ":00";
+  console.log(curHour);
+
+  const sevenDays = state.weatherRes.daily.time.map((day) =>
+    day.concat(`T${curHour}`)
+  );
+
+  const weekdays = sevenDays.map((day) => {
+    const toNewDate = new Date(day);
+    const dayName = toNewDate.toLocaleDateString("en-us", { weekday: "long" });
+
+    return dayName;
+  });
+
+  const weekDayObj = sevenDays.map((date, i) => ({
+    date,
+    weekday: weekdays[i],
+  }));
+
+  return weekDayObj;
+}
+
 export function getHourlyForecast() {
   let above12 = [];
   let below12 = [];
@@ -273,6 +296,8 @@ export function getHourlyForecast() {
     unit,
     weatherType: weatherType[i],
   }));
+
+  getDailyHour();
 
   return hourlyObj;
 }
