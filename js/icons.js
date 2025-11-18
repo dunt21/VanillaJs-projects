@@ -5,7 +5,7 @@ import partlyCloudy from "url:../assets/images/icon-partly-cloudy.webp";
 import storm from "url:../assets/images/icon-storm.webp";
 import thunder from "url:../assets/images/icon-storm.webp";
 
-import sun from "url:../assets/images/icon-sunny.webp";
+import sunny from "url:../assets/images/icon-sunny.webp";
 import fog from "url:../assets/images/icon-fog.webp";
 import drizzle from "url:../assets/images/icon-drizzle.webp";
 import units from "url:../assets/images/icon-units.svg";
@@ -16,7 +16,7 @@ import error from "url:../assets/images/icon-error.svg";
 export {
   snow,
   storm,
-  sun,
+  sunny,
   thunder,
   rain,
   retry,

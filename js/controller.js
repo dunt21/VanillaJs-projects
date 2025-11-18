@@ -6,6 +6,7 @@ import weatherConditionsView from "./views/weatherConditionsView";
 import dailyForecastView from "./views/dailyForecastView";
 import hourlyForecastView from "./views/hourlyForecastView";
 import dropdownDailyView from "./views/dropdownDailyView";
+import unitsView from "./views/unitsView";
 
 //func to get the geo units of user's city
 async function controlGeoCode(query) {
@@ -42,7 +43,7 @@ async function handleSelectedCityId(id) {
   //when the data is ready display the card to the user's interface
   controlMainWeatherCard();
 
-  controlWeatherConditions();
+  unitsView.updateDropdown(controlWeatherConditions);
 
   controlDailyForecast();
 
@@ -61,8 +62,8 @@ export function controlMainWeatherCard() {
 }
 
 //used to get the data of the weather conditions then pass to its view for display
-export function controlWeatherConditions() {
-  const data = Models.getWeatherConditions();
+export function controlWeatherConditions(unitType = "metric") {
+  const data = Models.getWeatherConditions(unitType);
 
   weatherConditionsView.updateCards(data);
 }
@@ -72,17 +73,20 @@ export function controlDailyForecast() {
   const data = Models.getDailyForecast();
 
   dailyForecastView.updateCards(data);
+
+  //displaying the 7 days of the week
+  dropdownDailyView.updateDropdown(
+    Models.getDailyHour(),
+    controlHourlyForecast
+  );
 }
 
-export function controlHourlyForecast() {
-  dropdownDailyView.updateDropdown(Models.getDailyHour());
-
-  const data = Models.getHourlyForecast();
+//to get the hourly data of a particular day and passing it into the view
+export function controlHourlyForecast(time) {
+  const data = Models.getHourlyForecast(time);
 
   hourlyForecastView.updateCards(data);
 }
-
-dropdownDailyView.getSelectedDay();
 
 function init() {
   SearchBar.retrieveQuery(controlGeoCode);

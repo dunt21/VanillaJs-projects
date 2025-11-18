@@ -1,5 +1,6 @@
 import { GEOCODE_API, weatherAPI } from "./config";
-import { calcFeelsLike } from "./helper";
+import calcToImperialMetric from "./helper";
+import calcToImperial, { calcFeelsLike } from "./helper";
 import { units } from "./icons";
 import { weatherCodes } from "./weatherCode";
 
@@ -140,9 +141,9 @@ const curDateTime = `T${new Date()
   .split(":")[0]
   .replace()}:00`.slice(1);
 
-function getTimeIndex() {
+function getTimeIndex(time = curDateTime) {
   const timeIndex = state.weatherRes.hourly?.time.findIndex(
-    (time) => time === curDateTime
+    (timeData) => timeData === time
   );
 
   return timeIndex;
@@ -166,13 +167,12 @@ export function getMainWeatherCardData() {
     city: `${state.query.selectedCity?.city}, ${state.query.selectedCity?.country}`,
     units: state.weatherRes.hourly.units?.temp,
   };
-  getWeatherConditions();
 
   return data;
 }
 
 //used to group the data of the current hour weather condition
-export function getWeatherConditions() {
+export function getWeatherConditions(unitType) {
   const timeIndex = getTimeIndex();
 
   const humidity = state.weatherRes.hourly.humidity.at(timeIndex);
@@ -180,22 +180,13 @@ export function getWeatherConditions() {
   const wind = state.weatherRes.hourly.wind.at(timeIndex);
   const temp = state.weatherRes.hourly.temperature.at(timeIndex);
 
-  const feelsLike = calcFeelsLike(temp, humidity, wind);
-
-  const data = {
-    humidity,
+  const data = calcToImperialMetric(
+    unitType,
+    temp,
     precipitation,
-    wind: Math.round(wind),
-    feelsLike: Math.round(feelsLike),
-    units: {
-      humidity: state.weatherRes.hourly.units.humidity,
-      precipitation: state.weatherRes.hourly.units.precipitation,
-      wind: state.weatherRes.hourly.units.wind,
-      feelsLike: state.weatherRes.hourly.units.temp,
-    },
-  };
-
-  getDailyForecast();
+    wind,
+    humidity
+  );
 
   return data;
 }
@@ -233,14 +224,12 @@ export function getDailyForecast() {
     unit: state.weatherRes.daily.units.temp,
   }));
 
-  getHourlyForecast();
-
   return groupedDate;
 }
 
+//to get seven days of the week with the time of the day
 export function getDailyHour() {
   const curHour = new Date().getHours() + ":00";
-  console.log(curHour);
 
   const sevenDays = state.weatherRes.daily.time.map((day) =>
     day.concat(`T${curHour}`)
@@ -261,11 +250,12 @@ export function getDailyHour() {
   return weekDayObj;
 }
 
-export function getHourlyForecast() {
+//to get the hours, weather and temp of a particular day
+export function getHourlyForecast(time) {
   let above12 = [];
   let below12 = [];
 
-  const timeIndex = getTimeIndex();
+  const timeIndex = getTimeIndex(time);
 
   state.weatherRes.hourly.time
     .slice(timeIndex, timeIndex + 8)
@@ -296,8 +286,6 @@ export function getHourlyForecast() {
     unit,
     weatherType: weatherType[i],
   }));
-
-  getDailyHour();
 
   return hourlyObj;
 }

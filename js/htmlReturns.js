@@ -72,7 +72,7 @@ export function displayWeatherContainer(markup) {
                   class="btn m-1 bg-bluish-gray px-4 border-0 rounded-lg shadow-none"
                 >
                   <div class="flex gap-3 items-center">
-                    <p>-</p>
+                    <p class = 'selected-day'>-</p>
                     <img
                       src=${icons.dropdown}
                       alt="dropdown-icon"

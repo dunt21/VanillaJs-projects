@@ -53,18 +53,22 @@
           </div>
           <ul
             tabindex="1"
-            class="dropdown-content menu bg-neutral800 rounded-box z-1 w-52 p-2 shadow-sm"
+            class="dropdown-content menu bg-neutral800 rounded-box z-1 w-52 p-2 shadow-sm units-container [&>div]:pointer-events-none"
           >
-            <li><a>Swith to imperial</a></li>
+            <li>
+              <a data-unit="imperial" class="unit-txt">Swith to imperial</a>
+            </li>
             <div class="border-b-[0.1px] border-b-light-gray mb-1">
               <li>
                 <a class="pointer-events-none text-light-gray text-xs"
                   >Temperature</a
                 >
               </li>
-              <li><a>Celsius(°C)</a></li>
+              <li>
+                <a class="metric-units">Celsius(°C) </a>
+              </li>
 
-              <li><a>Fahrenheit(°F)</a></li>
+              <li><a class="imperial-units">Fahrenheit(°F)</a></li>
             </div>
             <div class="border-b-[0.1px] border-b-light-gray mb-1">
               <li>
@@ -72,9 +76,9 @@
                   >Wind Speed</a
                 >
               </li>
-              <li><a>km/h</a></li>
+              <li><a class="metric-units">km/h</a></li>
 
-              <li><a>mph</a></li>
+              <li><a class="imperial-units">mph</a></li>
             </div>
             <div class="">
               <li>
@@ -82,9 +86,9 @@
                   >Precipitation</a
                 >
               </li>
-              <li><a>Millimeters(mm)</a></li>
+              <li><a class="metric-units">Millimeters(mm)</a></li>
 
-              <li><a>Inches(in)</a></li>
+              <li><a class="imperial-units">Inches(in)</a></li>
             </div>
           </ul>
         </div>
@@ -225,7 +229,7 @@
                   class="btn m-1 bg-bluish-gray px-4 border-0 rounded-lg shadow-none"
                 >
                   <div class="flex gap-3 items-center">
-                    <p>-</p>
+                    <p class="selected-day">-</p>
                     <img
                       src="./assets/images/icon-dropdown.svg"
                       alt="dropdown-icon"
