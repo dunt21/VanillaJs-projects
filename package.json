@@ -5,9 +5,11 @@
   "license": "ISC",
   "author": "suadddd",
   "type": "commonjs",
+  "source": "index.html",
   "scripts": {
     "start": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch",
     "clean": "rimraf dist .parcel-cache",
+    "build": "parcel build index.html",
     "run": "parcel index.html"
   },
   "dependencies": {
