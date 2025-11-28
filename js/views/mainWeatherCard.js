@@ -8,7 +8,7 @@ class MainWeatherCard {
 
     const markup = `
     <div
-                  class="bg-[url(../assets/images/bg-today-large.svg)] flex flex-col justify-center gap-7 md:gap-0 sm:flex-row sm:justify-between items-center md:py-20 px-5 border-0 rounded-3xl min-w-full"
+                  class="bg-[url(../assets/images/bg-today-large.svg)] flex flex-col justify-center gap-7 md:gap-0 sm:flex-row sm:justify-between items-center md:py-20 px-5 border-0 rounded-3xl bg-cover bg-center"
               >
     <div class="space-y-2">
                   <p class="font-bold text-2xl">${data.city}</p>
