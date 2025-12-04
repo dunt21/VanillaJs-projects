@@ -9,7 +9,7 @@
   "scripts": {
     "start": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch",
     "clean": "rimraf dist .parcel-cache",
-    "build": "parcel build",
+    "build": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css && parcel build",
     "run": "parcel index.html"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
   "devDependencies": {
     "daisyui": "^5.3.10",
     "parcel": "^2.16.0",
+    "rimraf": "^6.1.2",
     "url": "^0.11.4"
   }
 }
