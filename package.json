@@ -9,7 +9,7 @@
   "scripts": {
     "start": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch",
     "clean": "rimraf dist .parcel-cache",
-    "build": "parcel build index.html",
+    "build": "parcel build",
     "run": "parcel index.html"
   },
   "dependencies": {

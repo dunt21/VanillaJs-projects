@@ -2483,6 +2483,10 @@
     --tw-ease: var(--ease-out);
     transition-timing-function: var(--ease-out);
   }
+  .outline-none {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
   .\[--gap\:10px\] {
     --gap: 10px;
   }
